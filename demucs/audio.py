@@ -252,8 +252,9 @@ def save_audio(wav: torch.Tensor,
     if suffix == ".mp3":
         # encode_mp3(wav, path, samplerate, bitrate, verbose=True)
         path = str(path)
+        print("Saving MP3 to: ", path)
         os.makedirs("/".join(path.split("/")[:-1]), exist_ok=True)
-        sf.write(path, wav.float().cpu().numpy(), samplerate=samplerate, format="MP3")
+        sf.write(path, wav.squeeze().float().cpu().numpy(), samplerate=samplerate, format="MP3")
     elif suffix == ".wav":
         if as_float:
             bits_per_sample = 32
