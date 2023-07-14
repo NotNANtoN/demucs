@@ -13,6 +13,7 @@ import numpy as np
 import torch
 import torchaudio as ta
 import typing as tp
+import soundfile as sf
 
 from .utils import temp_filenames
 
@@ -248,7 +249,8 @@ def save_audio(wav: torch.Tensor,
     path = Path(path)
     suffix = path.suffix.lower()
     if suffix == ".mp3":
-        encode_mp3(wav, path, samplerate, bitrate, verbose=True)
+        # encode_mp3(wav, path, samplerate, bitrate, verbose=True)
+        sf.write(path, wav.numpy(), samplerate=samplerate)
     elif suffix == ".wav":
         if as_float:
             bits_per_sample = 32
