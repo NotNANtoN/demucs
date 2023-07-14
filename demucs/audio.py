@@ -250,6 +250,7 @@ def save_audio(wav: torch.Tensor,
     suffix = path.suffix.lower()
     if suffix == ".mp3":
         # encode_mp3(wav, path, samplerate, bitrate, verbose=True)
+        os.makedirs("/".join(path.split("/")[:-1]), exist_ok=True)
         sf.write(path, wav.numpy(), samplerate=samplerate)
     elif suffix == ".wav":
         if as_float:
